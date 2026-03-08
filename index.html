@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Club Event 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+:root {
+  --accent:  #ff7e5f;
+  --accent2: #feb47b;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url('qwertyuiopnnnn.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  font-family: 'Outfit', sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1180px;
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #5a0000;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.07);
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── LEFT: CAROUSEL ── */
+.poster-side {
+  width: 52%;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1.414;
+  position: relative;
+  overflow: hidden;
+  background: #5a0000;
+  align-self: stretch;
+}
+
+.slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+  z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  background: #5a0000;
+}
+.slide.active { opacity: 1; z-index: 2; }
+
+.slide img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.slide-counter {
+  position: absolute; top: 14px; right: 14px;
+  z-index: 10;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+  padding: 4px 12px; border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: white; width: 40px; height: 40px;
+  border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; transition: all 0.2s; opacity: 0;
+}
+.poster-side:hover .arrow { opacity: 1; }
+.arrow:hover {
+  background: rgba(255,126,95,0.6);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.1);
+}
+.arrow-left  { left:  12px; }
+.arrow-right { right: 12px; }
+
+.dots {
+  position: absolute; bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 8px; z-index: 10;
+}
+.dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer; border: none; transition: all 0.3s;
+}
+.dot.active { background: var(--accent); transform: scale(1.35); }
+
+.pbar {
+  position: absolute; bottom: 0; left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  z-index: 10; width: 0%;
+}
+
+/* ── RIGHT: INFO ── */
+.info-side {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 48px 36px;
+  background: linear-gradient(160deg, rgba(60,0,0,0.82) 0%, rgba(30,0,0,0.92) 100%);
+  backdrop-filter: blur(12px);
+  border-left: 1px solid rgba(255,255,255,0.07);
+  color: white;
+  position: relative;
+}
+
+.brand {
+  position: absolute;
+  top: 18px; right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 5;
+}
+
+.brand-name {
+  text-align: right;
+  line-height: 1.2;
+}
+
+.brand-name span:first-child {
+  display: block;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #fff;
+}
+
+.brand-name span:last-child {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+.logo-box {
+  width: 62px; height: 62px;
+  border-radius: 12px; overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.2);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.08);
+  flex-shrink: 0;
+}
+.logo-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 5px 15px; border-radius: 20px;
+  margin-bottom: 22px;
+  box-shadow: 0 4px 15px rgba(255,126,95,0.4);
+}
+
+.event-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(44px, 4.5vw, 64px);
+  line-height: 1; letter-spacing: 2px;
+  background: linear-gradient(135deg, #fff 40%, rgba(255,200,180,0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.line {
+  width: 48px; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  margin: 18px auto 20px;
+}
+
+.desc {
+  font-size: 15px; line-height: 1.75;
+  color: rgba(255,220,210,0.75);
+  max-width: 280px; font-weight: 300;
+  margin-bottom: 38px;
+}
+
+.btn {
+  position: relative;
+  padding: 16px 52px;
+  font-size: 16px; font-weight: 700;
+  font-family: 'Outfit', sans-serif; letter-spacing: 0.5px;
+  border: none; border-radius: 50px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white; cursor: pointer; overflow: hidden;
+  box-shadow: 0 8px 28px rgba(255,126,95,0.45);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.btn::after {
+  content: '';
+  position: absolute; top: -50%; left: -60%;
+  width: 50%; height: 200%;
+  background: rgba(255,255,255,0.22);
+  transform: skewX(-20deg); transition: left 0.5s;
+}
+.btn:hover::after { left: 130%; }
+.btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 14px 36px rgba(255,126,95,0.55);
+}
+.btn:active { transform: scale(0.97); }
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+
+  body {
+    padding: 0;
+    align-items: flex-start;
+    background-attachment: scroll;
+  }
+
+  .card {
+    flex-direction: column;
+    border-radius: 0;
+    box-shadow: none;
+    animation: none;
+    min-height: 100vh;
+    background: transparent;
+  }
+
+  .poster-side {
+    width: 100%;
+    aspect-ratio: 1 / 1.414;
+    height: auto;
+    align-self: auto;
+    background-image: url('qwertyuiopnnnn.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .slide { background: transparent; }
+  .arrow { display: none; }
+
+  .info-side {
+    flex: 1;
+    padding: 44px 24px 60px;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .brand { top: 16px; right: 16px; gap: 8px; }
+  .brand-name span:first-child { font-size: 15px; }
+  .brand-name span:last-child  { font-size: 9px; }
+  .logo-box { width: 50px; height: 50px; }
+  .btn { width: 100%; max-width: 320px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- CAROUSEL -->
+  <div class="poster-side" id="carousel">
+
+    <div class="slide active"><img src="techtalk.png"   alt="Tech Talk"></div>
+    <div class="slide"><img src="introduce.png"  alt="Introduce Speaker"></div>
+    <div class="slide"><img src="Snaapzy.png"    alt="Snaapzy Sponsor"></div>
+    <div class="slide"><img src="Energy_Drink.JPG"    alt="Energy Drink"></div>
+
+    <span class="slide-counter" id="ctr">1 / 4</span>
+    <button class="arrow arrow-left"  onclick="move(-1)">&#8592;</button>
+    <button class="arrow arrow-right" onclick="move(1)">&#8594;</button>
+    <div class="dots" id="dots"></div>
+    <div class="pbar" id="pbar"></div>
+  </div>
+
+  <!-- INFO -->
+  <div class="info-side">
+
+    <div class="brand">
+      <div class="brand-name">
+        <span>Solace Studios</span>
+        <span>Bennett University</span>
+      </div>
+      <div class="logo-box">
+        <img src="Solace.PNG" alt="Solace Logo">
+      </div>
+    </div>
+
+    <span class="badge">⚡ Live Event</span>
+    <div class="event-title">Tech Talk<br>2026</div>
+    <div class="line"></div>
+
+    <p class="desc">
+      Register now to discover how to build a powerful LinkedIn profile and an impressive game development portfolio.
+      Network with passionate tech minds and enjoy free energy drinks while leveling up your career! ⚡
+    </p>
+
+    <button class="btn" onclick="register()">Register Now &rarr;</button>
+  </div>
+</div>
+
+<script>
+  const DELAY = 3500;
+  const slides   = document.querySelectorAll('.slide');
+  const dotsWrap = document.getElementById('dots');
+  const ctr      = document.getElementById('ctr');
+  const pbar     = document.getElementById('pbar');
+
+  let cur = 0, autoTimer, barRaf, barStart, barRunning = false;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `Slide ${i + 1}`);
+    d.onclick = () => { clearInterval(autoTimer); goTo(i); startAuto(); };
+    dotsWrap.appendChild(d);
+  });
+
+  const allDots = () => dotsWrap.querySelectorAll('.dot');
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    allDots()[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    allDots()[cur].classList.add('active');
+    ctr.textContent = `${cur + 1} / ${slides.length}`;
+    resetBar();
+  }
+
+  function move(dir) {
+    clearInterval(autoTimer);
+    goTo(cur + dir);
+    startAuto();
+  }
+
+  function resetBar() {
+    barRunning = false;
+    cancelAnimationFrame(barRaf);
+    pbar.style.width = '0%';
+    requestAnimationFrame(ts => {
+      barRunning = true; barStart = ts; animBar(ts);
+    });
+  }
+
+  function animBar(ts) {
+    if (!barRunning) return;
+    const pct = Math.min(((ts - barStart) / DELAY) * 100, 100);
+    pbar.style.width = pct + '%';
+    if (pct < 100) barRaf = requestAnimationFrame(animBar);
+  }
+
+  function startAuto() {
+    resetBar();
+    autoTimer = setInterval(() => goTo(cur + 1), DELAY);
+  }
+
+  startAuto();
+
+  function register() {
+    window.location.href = "https://forms.gle/pD53wF68UhBYG2Ux6";
+  }
+</script>
+
+</body>
+</html>
