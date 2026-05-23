@@ -87,4 +87,3 @@ This project is for club/educational use only. All poster designs and logos belo
 
 ---
 
-<p align="center">Made with ❤️ by Solace Studios · Bennett University</p>
